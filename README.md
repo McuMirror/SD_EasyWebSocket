@@ -1,4 +1,4 @@
-# SD_EasyWebSocket_BETA 1.41
+# SD_EasyWebSocket BETA 1.41
 Simple library for WebSocket communication with ESP-WROOM-02(ESP8266) and smartphone browser.  
 This requires the Arduino core for ESP8266 WiFi chip library.   
 https://github.com/esp8266/arduino  
