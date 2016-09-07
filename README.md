@@ -58,5 +58,5 @@ Copyright (c) 2015 Ivan Grokhotkov. All rights reserved.
 Released under the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1  
   
 # My Blog: 
-Other usage is Japanese, please visit my blog.
+Other usage is Japanese, please visit my blog.  
 https://www.mgo-tec.com
