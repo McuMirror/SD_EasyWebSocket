@@ -9,7 +9,6 @@ Use the SD card (SPI), please upload the ews_head.txt file to SD/EWS/ folder.
 #include <SD_EasyWebSocket.h>
 #include <ESP8266WiFi.h>
 #include <SD.h>
-#include <SPI.h>
 #include <Hash.h>
 
 const uint8_t sclk = 14; //SDcard SCLK
