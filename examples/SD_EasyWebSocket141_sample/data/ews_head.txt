@@ -1,4 +1,4 @@
-<!-- The MIT License (MIT) Copyright (c) 2016 Mgo-tec -->
+﻿<!-- The MIT License (MIT) Copyright (c) 2016 Mgo-tec -->
 <!DOCTYPE html>
   <html>
     <head>
