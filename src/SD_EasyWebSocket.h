@@ -55,7 +55,7 @@ public:
   void SoftAP_setup(const char* ssid, const char* password);
   void handleClient();
   void EWS_HandShake(uint8_t cs_SD, const char* HTML_file, String _res_html1, String _res_html2, String _res_html3, String _res_html4, String _res_html5, String _res_html6, String _res_html7);
-  void EWS_Dev_HandShake(uint8_t cs_SD, const char* HTML_head_file, const char* HTML_file1, String _res_html1, String _res_html2, String _res_html3, const char* HTML_file2, const char* HTML_file3);
+  void EWS_Dev_HandShake(uint8_t cs_SD, const char* HTML_head_file, const char* HTML_file1, String _res_html1, String _res_html2, String _res_html3, const char* HTML_file2);
   void EWS_HTTP_Responce();
   void Hash_Key(String h_req_key, char* h_resp_key);
   void EWS_ESP8266_Str_SEND(String str, String id);

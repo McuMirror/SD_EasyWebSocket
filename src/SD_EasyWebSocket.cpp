@@ -354,7 +354,7 @@ void SD_EasyWebSocket::EWS_HandShake(uint8_t cs_SD, const char* HTML_file, Strin
 }
 
 //********WebSocket Hand Shake ****************
-void SD_EasyWebSocket::EWS_Dev_HandShake(uint8_t cs_SD, const char* HTML_head_file, const char* HTML_file1, String _res_html1, String _res_html2, String _res_html3, const char* HTML_file2, const char* HTML_file3)
+void SD_EasyWebSocket::EWS_Dev_HandShake(uint8_t cs_SD, const char* HTML_head_file, const char* HTML_file1, String _res_html1, String _res_html2, String _res_html3, const char* HTML_file2)
 {
   String req;
   String hash_req_key;
@@ -464,19 +464,10 @@ void SD_EasyWebSocket::EWS_Dev_HandShake(uint8_t cs_SD, const char* HTML_head_fi
                 }else{
                   Serial.printf("%s File found. OK!\n",HTML_file2);
                 }
-                File HTML_3 = SD.open(HTML_file3, FILE_READ);
-                if (HTML_3 == NULL) {
-                  Serial.printf("%s File not found\n",HTML_file3);
-                  return;
-                }else{
-                  Serial.printf("%s File found. OK!\n",HTML_file3);
-                }
-                
-                
+        
                 size_t totalSizeH = HTML_head_F.size();
                 size_t totalSize1 = HTML_1.size();
                 size_t totalSize2 = HTML_2.size();
-                size_t totalSize3 = HTML_3.size();
                 __client.write(HTML_head_F, HTTP_DOWNLOAD_UNIT_SIZE);
                 __client.write(HTML_1, HTTP_DOWNLOAD_UNIT_SIZE);
                 
@@ -486,12 +477,10 @@ void SD_EasyWebSocket::EWS_Dev_HandShake(uint8_t cs_SD, const char* HTML_head_fi
                 __client.print(_res_html3);
                 
                 __client.write(HTML_2, HTTP_DOWNLOAD_UNIT_SIZE);
-                __client.write(HTML_3, HTTP_DOWNLOAD_UNIT_SIZE);
                 
                 HTML_head_F.close();
                 HTML_1.close();
                 HTML_2.close();
-                HTML_3.close();
 
                 Serial.println(F("---------------------HTTP response complete"));
 
