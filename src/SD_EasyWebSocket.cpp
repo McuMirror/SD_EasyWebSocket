@@ -1,6 +1,6 @@
 /*
   SD_EasyWebSocket.cpp - WebSocket for ESP-WROOM-02 ( esp8266 )
-  Beta version 1.41
+  Beta version 1.42
 
 Copyright (c) 2016 Mgo-tec
 This library improvement collaborator is Mr.Visyeii.
@@ -838,7 +838,7 @@ String SD_EasyWebSocket::EWS_ESP8266CharReceive(uint16_t pTime)
   }
 }
 
-String SD_EasyWebSocket::EWS_ESP8266DataReceive_SD_write(uint16_t pTime, uint8_t sd_cs, const char* bin_file)
+String SD_EasyWebSocket::EWS_ESP8266DataReceive_SD_write(uint16_t pTime, uint8_t sd_cs, char bin_file[14])
 {
   uint8_t b=0;
   uint8_t data_len;
@@ -974,7 +974,7 @@ String SD_EasyWebSocket::EWS_ESP8266DataReceive_SD_write(uint16_t pTime, uint8_t
   return "";
 }
 //********************************************************
-void SD_EasyWebSocket::EWS_ESP8266_Binary_Receive(uint8_t sd_cs, const char* bin_file)
+void SD_EasyWebSocket::EWS_ESP8266_Binary_Receive(uint8_t sd_cs, char bin_file[14])
 {
   uint8_t b=0;
   uint8_t data_len;
@@ -985,10 +985,10 @@ void SD_EasyWebSocket::EWS_ESP8266_Binary_Receive(uint8_t sd_cs, const char* bin
   String bin_file_str = String(bin_file);
   
   if(__client.available()){
-      if(SD.remove("BMPtest.bmp")){ //removeクラスは変数のconst char* DataFileを使うとエラーになるので注意
-        Serial.println(F("Removed BMPtest.bmp"));
+      if(SD.remove(bin_file)){
+        Serial.print(F("Removed ")); Serial.println(bin_file);
       }else{
-        Serial.println(F("Not removed BMPtest.bmp"));
+        Serial.print(F("Not removed ")); Serial.println(bin_file);
       }
       File B_F = SD.open(bin_file, FILE_WRITE);
 

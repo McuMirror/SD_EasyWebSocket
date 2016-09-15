@@ -1,25 +1,25 @@
-# SD_EasyWebSocket BETA 1.41
+# SD_EasyWebSocket BETA 1.42
 Simple library for WebSocket communication with ESP-WROOM-02(ESP8266) and smartphone browser.  
 This requires the Arduino core for ESP8266 WiFi chip library.   
 https://github.com/esp8266/arduino  
   
 This use SD card (SPI).
 # Change log:
-
-(1.41)
-
+(1.42)  
+Fixed ESP8266DataReceive_SD_write class.
+  
+(1.41)  
 *Upgraded EasyWebSocket beta 1.39 library.  
-Bug fix etc...
+Bug fix etc...  
+  
+【更新履歴】(Japanese)  
+(1.42)  
+ESP8266DataReceive_SD_write関数を修正しました。  
 
-(Japanese)
-
-【更新履歴】
-
-(1.41)
-
+(1.41)  
 当方のEasyWebSocket beta 1.39 ライブラリをSPI接続のSDカードでできるように更新。SPIFFSは使えません。  
 SPIFFSよりも速いです。  
-細かなバグやライブラリ再編、ボタンデザイン変更など。
+細かなバグやライブラリ再編、ボタンデザイン変更など。  
 
 # Credits and license
 *Licensed under the GNU LESSER GENERAL PUBLIC LICENSE Version 2.1

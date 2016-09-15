@@ -1,6 +1,6 @@
 /*
   SD_EasyWebSocket.h - WebSocket for ESP-WROOM-02 ( esp8266 )
-  Beta version 1.41
+  Beta version 1.42
 
 Copyright (c) 2016 Mgo-tec
 This library improvement collaborator is Mr.Visyeii.
@@ -61,8 +61,8 @@ public:
   void EWS_ESP8266_Str_SEND(String str, String id);
   void EWS_PING_SEND();
   String EWS_ESP8266CharReceive(uint16_t pTime);
-  String EWS_ESP8266DataReceive_SD_write(uint16_t pTime, uint8_t sd_cs, const char* bin_file);
-  void EWS_ESP8266_Binary_Receive(uint8_t sd_cs, const char* bin_file);
+  String EWS_ESP8266DataReceive_SD_write(uint16_t pTime, uint8_t sd_cs, char bin_file[14]);
+  void EWS_ESP8266_Binary_Receive(uint8_t sd_cs, char bin_file[14]);
   String EWS_OnOff_Button(String button_id, uint16_t width, uint16_t height, uint8_t font_size, String f_color, String b_color);
   String EWS_On_Momentary_Button(String button_id, String text, uint16_t width, uint16_t height, uint8_t font_size, String f_color, String b_color);
   String EWS_Touch_Slider_BT(String slider_id, String vbox_id);
