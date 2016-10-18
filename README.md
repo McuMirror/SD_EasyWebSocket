@@ -1,10 +1,23 @@
-# SD_EasyWebSocket BETA 1.42
+# SD_EasyWebSocket BETA 1.45
 Simple library for WebSocket communication with ESP-WROOM-02(ESP8266) and smartphone browser.  
 This requires the Arduino core for ESP8266 WiFi chip library.   
 https://github.com/esp8266/arduino  
-  
-This use SD card (SPI).
+This use SD card (SPI).  
+
+My Blog: https://www.mgo-tec.com
 # Change log:
+(1.45)  
+A watchdog timer of ESP8266 to create a grace period to operate, has been added here and there yield ().  
+As a result, I think the operation is stable.
+Sample sketch also has been corrected.  
+
+-NEW class-  
+EWS_BrowserReceiveTextTag2  
+EWS_Status_Text2  
+EWS_WebSocket_Reconnection_Button2  
+EWS_Close_Button2  
+EWS_Window_ReLoad_Button2  
+
 (1.42)  
 Fixed ESP8266DataReceive_SD_write class.
   
@@ -13,6 +26,18 @@ Fixed ESP8266DataReceive_SD_write class.
 Bug fix etc...  
   
 【更新履歴】(Japanese)  
+(1.45)  
+ESP8266のウォッチドッグタイマを作動させる猶予時間を作るために、所々 yield() を追加しました。  
+それにより、動作が安定したと思います。  
+サンプルスケッチも修正しました。
+
+-NEW class-  
+EWS_BrowserReceiveTextTag2  
+EWS_Status_Text2  
+EWS_WebSocket_Reconnection_Button2  
+EWS_Close_Button2  
+EWS_Window_ReLoad_Button2  
+
 (1.42)  
 ESP8266DataReceive_SD_write関数を修正しました。  
 

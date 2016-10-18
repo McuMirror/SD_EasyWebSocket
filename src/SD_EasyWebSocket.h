@@ -1,11 +1,11 @@
 /*
   SD_EasyWebSocket.h - WebSocket for ESP-WROOM-02 ( esp8266 )
-  Beta version 1.42
+  Beta version 1.45
 
 Copyright (c) 2016 Mgo-tec
 This library improvement collaborator is Mr.Visyeii.
 
-This library is used by the Arduino IDE(Tested in ver1.6.11).
+This library is used by the Arduino IDE(Tested in ver1.6.12).
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public
 License as published by the Free Software Foundation; either
@@ -73,11 +73,16 @@ public:
   String EWS_Sl_Text(String text_id, uint8_t font_size, String color);
   String EWS_Body_style(String text_color, String bg_color);
   String EWS_BrowserReceiveTextTag(String id, String name, uint8_t font_size, String fnt_col);
+	String EWS_BrowserReceiveTextTag2(String id, String name, String b_color, uint8_t font_size, String fnt_col);
   String EWS_Close_Button(String name, uint16_t width, uint16_t height, String font_col, uint8_t font_size);
+	String EWS_Close_Button2(String name, String BG_col, uint16_t width, uint16_t height, String font_col, uint8_t font_size);
   String EWS_Window_ReLoad_Button(String name, uint16_t width, uint16_t height, String font_col, uint8_t font_size);
-  String EWS_WebSocket_Reconnection_Button(String name, String BG_col, uint16_t width, uint16_t height, String font_col, uint8_t font_size);
-  String EWS_BrowserSendRate();
+  String EWS_Window_ReLoad_Button2(String name, String BG_col, uint16_t width, uint16_t height, String font_col, uint8_t font_size);
+	String EWS_WebSocket_Reconnection_Button(String name, String BG_col, uint16_t width, uint16_t height, String font_col, uint8_t font_size);
+  String EWS_WebSocket_Reconnection_Button2(String name, String BG_col, uint16_t width, uint16_t height, String font_col, uint8_t font_size);
+	String EWS_BrowserSendRate();
   String EWS_Status_Text(String name, uint8_t font_size, String color);
+	String EWS_Status_Text2(String name, String b_color, uint8_t font_size, String f_color);
   String EWS_Canvas_Slider_T(String slider_id, uint16_t width, uint16_t height, String frame_col, String fill_col);
   String EWS_TextBox_Send(String id, String txt, String BT_txt);
   String EWS_Web_Get(char* host, String target_ip, uint8_t char_tag, String Final_tag, String Begin_tag, String End_tag, String Paragraph);

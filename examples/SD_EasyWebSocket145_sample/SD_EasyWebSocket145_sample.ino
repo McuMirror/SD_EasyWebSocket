@@ -1,6 +1,6 @@
 /*
 SD_WebSocket for ESP-WROOM-02 ( ESP8266 ) Sample Sketch
-for Beta version 1.41
+for Beta version 1.45
 ---> https://www.mgo-tec.com
 Please rewrite their own the ssid and password.
 Please rewrite their own local IP address of "/data/spiffs_01.txt" in the sketch folder.
@@ -19,7 +19,7 @@ const uint8_t cs_SD = 15; //SDcard CS(ChipSelect)
 const char* ssid = "xxxx";
 const char* password = "xxxx";
 
-const char* HTM_head_file = "EWS/ews_head.txt"; //HTML header file
+const char* HTM_head_file = "EWS/EwsHead2.txt"; //HTML header file
 
 long ESP_send_Time;
 
@@ -36,7 +36,7 @@ String html_str6;
 String html_str7;
 
 String ret_str;
-String txt;
+String txt = "text send?";
 
 int PingSendTime = 30000;
 
@@ -51,13 +51,13 @@ void setup()
   html_str1 += "<font size=3>\r\n";
   html_str1 += "ESP-WROOM-02(ESP8266)\r\n";
   html_str1 += "<br>\r\n";
-  html_str1 += "EasyWebSocket Beta1.3 Sample\r\n";
+  html_str1 += "SD_EasyWebSocket Beta1.45 Sample\r\n";
   html_str1 += "</font><br>\r\n";
   html_str1 += ews.EWS_BrowserSendRate();
   html_str1 += "<br>\r\n";
-  html_str1 += ews.EWS_BrowserReceiveTextTag("wroomTXT","from WROOM DATA",20,"green");
+  html_str1 += ews.EWS_BrowserReceiveTextTag2("wroomTXT", "from WROOM DATA", "#555", 20,"green");
   html_str1 += "<br>\r\n";
-  html_str1 += ews.EWS_Status_Text("WebSocket Status",20,"#FF00FF");
+  html_str1 += ews.EWS_Status_Text2("WebSocket Status","#555", 20,"#FF00FF");
   html_str1 += "<br><br>\r\n";
   html_str1 += ews.EWS_TextBox_Send("txt1", "Hello Easy WebSocket Beta1.3","送信");
   html_str1 += "<br><br>\r\n";
@@ -98,10 +98,10 @@ void setup()
   html_str6 += ews.EWS_Touch_Slider_BT("-RGB", "Txt4");
   html_str6 += ews.EWS_Sl_BoxText("Txt4",30,20,15,"#000000");
   html_str6 += "<br><br><br>\r\n";
-  html_str6 += ews.EWS_WebSocket_Reconnection_Button("WS-Reconnect", "grey", 200, 40, "black" , 17);
+  html_str6 += ews.EWS_WebSocket_Reconnection_Button2("WS-Reconnect", "grey", 200, 40, "black" , 17);
   html_str6 += "<br><br>\r\n";  
-  html_str6 += ews.EWS_Close_Button("WS CLOSE", 150, 40, "red", 17);
-  html_str6 += ews.EWS_Window_ReLoad_Button("ReLoad", 150, 40, "blue", 17);
+  html_str6 += ews.EWS_Close_Button2("WS CLOSE", "#bbb", 150, 40, "red", 17);
+  html_str6 += ews.EWS_Window_ReLoad_Button2("ReLoad", "#bbb", 150, 40, "blue", 17);
   html_str6 += "</body></html>\r\n";
 
   html_str7 = ""; //The description here is if the string is too large. If you do not want to use it is empty.
@@ -120,7 +120,7 @@ void setup()
   ews.AP_Connect(ssid, password);
 
   Serial.println(); Serial.println("Initializing SD card...");
-  if (!SD.begin(cs_SD,SPI_FULL_SPEED)) {
+  if (!SD.begin(cs_SD,40000000)) {
     Serial.println("Card failed, or not present");
     return;
   }
@@ -135,7 +135,7 @@ void loop() {
   String str;
 
   if(ret_str != "_close"){
-    if(millis()-ESP_send_Time > 500){//Data transmission from WROOM (ESP8266) every 500ms
+    if(millis()-ESP_send_Time > 300){//Data transmission from WROOM (ESP8266) every 500ms
       if(cnt > 3){
         cnt = 0;
       }
@@ -202,7 +202,11 @@ void loop() {
         }
       }
     }
+  }else if(ret_str == "_close"){
+    ESP_send_Time = millis();
+    ret_str = "";
   }
+	yield(); //これ重要かも
 }
 
 //**************************************************************
