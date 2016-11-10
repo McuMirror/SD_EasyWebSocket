@@ -1,12 +1,4 @@
-<!-- The MIT License (MIT) Copyright (c) 2016 Mgo-tec -->
-<!DOCTYPE html>
-  <html>
-    <head>
-      <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
-      <meta name='viewport' content='width=device-width, initial-scale=0.9, maximum-scale=0.9, user-scalable=no'>
-      <title>SD_EasyWebSocket Beta 1.42</title>
-      <script type='text/javascript'>
-        var MyLocal_IP = '192.168.0.21';
+';
         var wsUri = 'ws://' + MyLocal_IP;
         var websocket = null;
         var LastTime1;

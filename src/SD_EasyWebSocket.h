@@ -1,6 +1,6 @@
 /*
   SD_EasyWebSocket.h - WebSocket for ESP-WROOM-02 ( esp8266 )
-  Beta version 1.45
+  Beta version 1.47
 
 Copyright (c) 2016 Mgo-tec
 This library improvement collaborator is Mr.Visyeii.
@@ -56,7 +56,8 @@ public:
   void handleClient();
   void EWS_HandShake(uint8_t cs_SD, const char* HTML_file, String _res_html1, String _res_html2, String _res_html3, String _res_html4, String _res_html5, String _res_html6, String _res_html7);
   void EWS_Dev_HandShake(uint8_t cs_SD, const char* HTML_head_file, const char* HTML_file1, String _res_html1, String _res_html2, String _res_html3, const char* HTML_file2);
-  void EWS_HTTP_Responce();
+  void EWS_Dev_AutoLIP_HandShake(uint8_t cs_SD, const char* HTML_head_file1, IPAddress res_LIP, const char* HTML_head_file2, const char* HTML_file1, String res_html1, String res_html2, String res_html3, const char* HTML_file2);
+	void EWS_HTTP_Responce();
   void Hash_Key(String h_req_key, char* h_resp_key);
   void EWS_ESP8266_Str_SEND(String str, String id);
   void EWS_PING_SEND();

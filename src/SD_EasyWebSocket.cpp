@@ -1,6 +1,6 @@
 /*
   SD_EasyWebSocket.cpp - WebSocket for ESP-WROOM-02 ( esp8266 )
-  Beta version 1.45
+  Beta version 1.47
 
 Copyright (c) 2016 Mgo-tec
 This library improvement collaborator is Mr.Visyeii.
@@ -163,7 +163,7 @@ void SD_EasyWebSocket::handleClient()
   }
 }
 //********WebSocket Hand Shake ****************
-void SD_EasyWebSocket::EWS_HandShake(uint8_t cs_SD, const char* HTML_file, String _res_html1, String _res_html2, String _res_html3, String _res_html4, String _res_html5, String _res_html6, String _res_html7)
+void SD_EasyWebSocket::EWS_HandShake(uint8_t cs_SD, const char* HTML_file, String res_html1, String res_html2, String res_html3, String res_html4, String res_html5, String res_html6, String res_html7)
 {
   String req;
   String hash_req_key;
@@ -290,13 +290,13 @@ void SD_EasyWebSocket::EWS_HandShake(uint8_t cs_SD, const char* HTML_file, Strin
 
                   HTML_F.close();
 */                  
-                  __client.print(_res_html1);
-                  __client.print(_res_html2);
-                  __client.print(_res_html3);
-                  __client.print(_res_html4);
-                  __client.print(_res_html5);
-                  __client.print(_res_html6);
-                  __client.print(_res_html7);
+                  __client.print(res_html1);
+                  __client.print(res_html2);
+                  __client.print(res_html3);
+                  __client.print(res_html4);
+                  __client.print(res_html5);
+                  __client.print(res_html6);
+                  __client.print(res_html7);
 
                   
                 }else{
@@ -308,13 +308,13 @@ void SD_EasyWebSocket::EWS_HandShake(uint8_t cs_SD, const char* HTML_file, Strin
                 }
                 Serial.println(F("---------------------HTTP response complete"));
 
-                _res_html1 = "";
-                _res_html2 = "";
-                _res_html3 = "";
-                _res_html4 = "";
-                _res_html5 = "";
-                _res_html6 = "";
-                _res_html7 = "";
+                res_html1 = "";
+                res_html2 = "";
+                res_html3 = "";
+                res_html4 = "";
+                res_html5 = "";
+                res_html6 = "";
+                res_html7 = "";
 
                 __client.flush();
                 delay(5);
@@ -358,8 +358,8 @@ void SD_EasyWebSocket::EWS_HandShake(uint8_t cs_SD, const char* HTML_file, Strin
   }
 }
 
-//********WebSocket Hand Shake ****************
-void SD_EasyWebSocket::EWS_Dev_HandShake(uint8_t cs_SD, const char* HTML_head_file, const char* HTML_file1, String _res_html1, String _res_html2, String _res_html3, const char* HTML_file2)
+//********WebSocket Hand Shake (for devided HTML files)****************
+void SD_EasyWebSocket::EWS_Dev_HandShake(uint8_t cs_SD, const char* HTML_head_file, const char* HTML_file1, String res_html1, String res_html2, String res_html3, const char* HTML_file2)
 {
   String req;
   String hash_req_key;
@@ -478,9 +478,9 @@ void SD_EasyWebSocket::EWS_Dev_HandShake(uint8_t cs_SD, const char* HTML_head_fi
                 __client.write(HTML_1, HTTP_DOWNLOAD_UNIT_SIZE);
                 
                 
-                __client.print(_res_html1);
-                __client.print(_res_html2);
-                __client.print(_res_html3);
+                __client.print(res_html1);
+                __client.print(res_html2);
+                __client.print(res_html3);
                 
                 __client.write(HTML_2, HTTP_DOWNLOAD_UNIT_SIZE);
                 
@@ -490,9 +490,197 @@ void SD_EasyWebSocket::EWS_Dev_HandShake(uint8_t cs_SD, const char* HTML_head_fi
 
                 Serial.println(F("---------------------HTTP response complete"));
 
-                _res_html1 = "";
-                _res_html2 = "";
-                _res_html3 = "";
+                res_html1 = "";
+                res_html2 = "";
+                res_html3 = "";
+
+                __client.flush();
+                delay(5);
+
+                __client.stop();
+
+                delay(5);
+
+                Serial.println(F("\n--------------------GET HTTP client stop"));
+                req = "";
+                _Ini_html_on = true;
+                LoopTime = millis();
+
+                if(_Android_or_iPad == 'i'){
+                  break;
+                }
+              }else if(req.indexOf("GET /favicon") != -1){
+                SD_EasyWebSocket::Favicon_Response(req, 0, 1, 2);
+                break;
+              }
+            }
+						yield();
+          }
+          break;
+        case true:
+          switch(_WS_on){
+            case false:
+              SD_EasyWebSocket::EWS_HTTP_Responce();
+              _PingLastTime = millis();
+              _PongLastTime = millis();
+              break;
+            case true:
+              Serial.println(F("-----------------WebSocket HandShake Complete!"));
+              LoopTime = millis();
+              break;
+          }
+          break;
+      }
+			yield();
+    }
+  }
+}
+//********WebSocket Hand Shake (for devided HTML header files & Auto Local IP address)****************
+void SD_EasyWebSocket::EWS_Dev_AutoLIP_HandShake(uint8_t cs_SD, const char* HTML_head_file1, IPAddress res_LIP, const char* HTML_head_file2, const char* HTML_file1, String res_html1, String res_html2, String res_html3, const char* HTML_file2)
+{
+  String req;
+  String hash_req_key;
+  uint32_t LoopTime = millis();
+  
+  if(!_WS_on){
+    handleClient();
+  }
+  
+  if(__client){
+    LoopTime = millis();
+    while(!_WS_on){
+
+      if(millis()-LoopTime > 5000L){
+        _WS_on = false;
+        _Ini_html_on = false;
+        _Upgrade_first_on = false;
+        Serial.println(F("-----------------------Received TimeOut 1"));
+        if(__client){
+          delay(10);
+          __client.stop();
+          Serial.println(F("---------------------TimeOut Client Stop 1"));
+        }
+        Serial.println(F("-----------------------The Handshake returns to the beginning 1"));
+        break;
+      }
+
+      delay(1);
+      switch(_Ini_html_on){
+        case false:
+          LoopTime = millis();
+          while(__client){
+            if(millis()-LoopTime > 5000L){
+              _WS_on = false;
+              _Ini_html_on = false;
+              _Upgrade_first_on = false;
+              Serial.println(F("-----------------------Received TimeOut 2"));
+              if(__client){
+                delay(10);
+                __client.stop();
+                Serial.println(F("---------------------TimeOut Client Stop 2"));
+              }
+              Serial.println(F("-----------------------The Handshake returns to the beginning 2"));
+
+              break;
+            }
+            if(__client.available()){
+              req = __client.readStringUntil('\n');
+              if(req.indexOf("GET / HTTP") != -1){
+                Serial.println(F("-------------------HTTP Request from Browser"));
+                Serial.println(req);
+
+                while(req.indexOf("\r") != 0){
+                  req = __client.readStringUntil('\n');
+                  if(req.indexOf("Upgrade: websocket") != -1){
+                    Serial.println(F("-------------------Connection: Upgrade HTTP Request"));
+                    Serial.println(req);
+                    _Ini_html_on = true;
+                    _Upgrade_first_on = true;
+                    SD_EasyWebSocket::EWS_HTTP_Responce();
+                    _PingLastTime = millis();
+                    _PongLastTime = millis();
+                    break;
+                  }
+
+                  if(req.indexOf("Android") != -1){
+                    _Android_or_iPad = 'A';
+                  }else if(req.indexOf("iPad") != -1){
+                    _Android_or_iPad = 'i';
+                  }else if(req.indexOf("iPhone") != -1){
+                    _Android_or_iPad = 'P';
+                  }
+                  Serial.println(req);
+									yield();
+                }
+                req = "";
+                
+                if(_Upgrade_first_on == true)break;
+                
+                Serial.println(F("-------------------HTTP Response Send to Browser"));
+                delay(10);
+
+                __client.print(F("HTTP/1.1 200 OK\r\n"));
+                __client.print(F("Content-Type:text/html\r\n"));
+                __client.print(F("Connection:close\r\n\r\n"));
+
+                SD.begin(cs_SD, 40000000);
+                File HTML_head_F1 = SD.open(HTML_head_file1, FILE_READ);
+                if (HTML_head_F1 == NULL) {
+                  Serial.printf("%s File not found\n",HTML_head_file1);
+                  __client.print(F("ERROR!!<br>"));
+                  __client.print(F("HTML_head file has not been uploaded to the flash in SD card"));
+                  return;
+                }else{
+                  Serial.printf("%s File found. OK!\n",HTML_head_file1);
+                }
+								
+								File HTML_head_F2 = SD.open(HTML_head_file2, FILE_READ);
+                if (HTML_head_F2 == NULL) {
+                  Serial.printf("%s File not found\n",HTML_head_file2);
+                  __client.print(F("ERROR!!<br>"));
+                  __client.print(F("HTML_head file has not been uploaded to the flash in SD card"));
+                  return;
+                }else{
+                  Serial.printf("%s File found. OK!\n",HTML_head_file2);
+                }
+								
+                File HTML_1 = SD.open(HTML_file1, FILE_READ);
+                if (HTML_1 == NULL) {
+                  Serial.printf("%s File not found\n",HTML_file1);
+                  return;
+                }else{
+                  Serial.printf("%s File found. OK!\n",HTML_file1);
+                }
+								
+                File HTML_2 = SD.open(HTML_file2, FILE_READ);
+                if (HTML_2 == NULL) {
+                  Serial.printf("%s File not found\n",HTML_file2);
+                  return;
+                }else{
+                  Serial.printf("%s File found. OK!\n",HTML_file2);
+                }
+        
+                size_t totalSizeH1 = HTML_head_F1.size();
+								size_t totalSizeH2 = HTML_head_F2.size();
+                size_t totalSize1 = HTML_1.size();
+                size_t totalSize2 = HTML_2.size();
+                __client.write(HTML_head_F1, HTTP_DOWNLOAD_UNIT_SIZE);
+								__client.print(res_LIP);
+								__client.write(HTML_head_F2, HTTP_DOWNLOAD_UNIT_SIZE);
+                __client.write(HTML_1, HTTP_DOWNLOAD_UNIT_SIZE);
+                
+                __client.print(res_html1);
+                __client.print(res_html2);
+                __client.print(res_html3);
+                
+                __client.write(HTML_2, HTTP_DOWNLOAD_UNIT_SIZE);
+                
+                HTML_head_F1.close();
+								HTML_head_F2.close();
+                HTML_1.close();
+                HTML_2.close();
+
+                Serial.println(F("---------------------HTTP response complete"));
 
                 __client.flush();
                 delay(5);

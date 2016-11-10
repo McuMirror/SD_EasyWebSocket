@@ -1,9 +1,9 @@
 /*
 SD_WebSocket for ESP-WROOM-02 ( ESP8266 ) Sample Sketch
-for Beta version 1.45
+for Beta version 1.47
 ---> https://www.mgo-tec.com
 Please rewrite their own the ssid and password.
-Please rewrite their own local IP address of "/data/spiffs_01.txt" in the sketch folder.
+Please rewrite their own local IP address of "EWS/EwsHead2.txt" in the sketch folder.
 Use the SD card (SPI), please upload the ews_head.txt file to SD/EWS/ folder.
 */
 #include <SD_EasyWebSocket.h>
