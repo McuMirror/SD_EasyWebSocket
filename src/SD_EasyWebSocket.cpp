@@ -1,6 +1,6 @@
 /*
   SD_EasyWebSocket.cpp - WebSocket for ESP-WROOM-02 ( esp8266 )
-  Beta version 1.47
+  Beta version 1.47.1
 
 Copyright (c) 2016 Mgo-tec
 This library improvement collaborator is Mr.Visyeii.
@@ -250,7 +250,7 @@ void SD_EasyWebSocket::EWS_HandShake(uint8_t cs_SD, const char* HTML_file, Strin
                 __client.print(F("Content-Type:text/html\r\n"));
                 __client.print(F("Connection:close\r\n\r\n"));
 
-                SD.begin(cs_SD, 40000000);
+                SD.begin(cs_SD, SPI_FULL_SPEED);
                 File HTML_F = SD.open(HTML_file, FILE_READ);
                 if (HTML_F == NULL) {
                   Serial.printf("%s File not found\n",HTML_file);
@@ -446,7 +446,7 @@ void SD_EasyWebSocket::EWS_Dev_HandShake(uint8_t cs_SD, const char* HTML_head_fi
                 __client.print(F("Content-Type:text/html\r\n"));
                 __client.print(F("Connection:close\r\n\r\n"));
 
-                SD.begin(cs_SD, 40000000);
+                SD.begin(cs_SD, SPI_FULL_SPEED);
                 File HTML_head_F = SD.open(HTML_head_file, FILE_READ);
                 if (HTML_head_F == NULL) {
                   Serial.printf("%s File not found\n",HTML_head_file);
@@ -623,7 +623,7 @@ void SD_EasyWebSocket::EWS_Dev_AutoLIP_HandShake(uint8_t cs_SD, const char* HTML
                 __client.print(F("Content-Type:text/html\r\n"));
                 __client.print(F("Connection:close\r\n\r\n"));
 
-                SD.begin(cs_SD, 40000000);
+                SD.begin(cs_SD, SPI_FULL_SPEED);
                 File HTML_head_F1 = SD.open(HTML_head_file1, FILE_READ);
                 if (HTML_head_F1 == NULL) {
                   Serial.printf("%s File not found\n",HTML_head_file1);

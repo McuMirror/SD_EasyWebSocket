@@ -1,4 +1,4 @@
-# SD_EasyWebSocket BETA 1.47
+# SD_EasyWebSocket BETA 1.47.1
 Simple library for WebSocket communication with ESP-WROOM-02(ESP8266) and smartphone browser.  
 This requires the Arduino core for ESP8266 WiFi chip library.   
 https://github.com/esp8266/arduino  
@@ -6,6 +6,10 @@ This use SD card (SPI).
 
 My Blog: https://www.mgo-tec.com
 # Change log:
+(1.47.1)  
+Change the following part of SD_EasyWebSocket.cpp  
+SD.begin (cs_SD, 40000000); ---> SD.begin (cs_SD, SPI_FULL_SPEED);  
+  
 (1.47)  
 I added a function that can divide the Websocket header file and include the automatically acquired local IP address.  
 EWS_Dev_AutoLIP_HandShake
@@ -29,7 +33,14 @@ Fixed ESP8266DataReceive_SD_write class.
 *Upgraded EasyWebSocket beta 1.39 library.  
 Bug fix etc...  
   
-#【更新履歴】(Japanese)
+# 【更新履歴】(Japanese)
+(1.47.1)  
+SD_EasyWebSocket.cpp の以下の部分  
+SD.begin(cs_SD, 40000000);  
+を  
+SD.begin(cs_SD, SPI_FULL_SPEED);  
+に変更  
+  
 (1.47)  
 以下の関数を追加  
 

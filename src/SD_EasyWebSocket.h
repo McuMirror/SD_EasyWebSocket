@@ -1,6 +1,6 @@
 /*
   SD_EasyWebSocket.h - WebSocket for ESP-WROOM-02 ( esp8266 )
-  Beta version 1.47
+  Beta version 1.47.1
 
 Copyright (c) 2016 Mgo-tec
 This library improvement collaborator is Mr.Visyeii.
